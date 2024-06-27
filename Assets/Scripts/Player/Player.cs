@@ -73,6 +73,9 @@ public class Player : MonoBehaviour
         {
            myRigidBody.velocity = Vector2.up * forceJump;
            myRigidBody.transform.localScale = Vector2.one;
+
+            DOTween.Kill(myRigidBody.transform);
+
            HandleScaleJump();
         }
     }
