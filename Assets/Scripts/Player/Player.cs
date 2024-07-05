@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -29,11 +30,8 @@ public class Player : MonoBehaviour
 
 
     private float _currentSpeed;
-    
-    
-    
-    
-    
+
+    private int _playerDirection = 1;
     
     
     private void Update()
@@ -65,6 +63,7 @@ public class Player : MonoBehaviour
                 myRigidBody.transform.DOScaleX(-1, playerSwipeDuration);
             }
             animator.SetBool(boolRun, true);
+            _playerDirection = -1;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -75,6 +74,8 @@ public class Player : MonoBehaviour
                 myRigidBody.transform.DOScaleX(1, playerSwipeDuration);
             }
             animator.SetBool(boolRun, true);
+            _playerDirection = 1;
+
         }
         else
         {
@@ -96,6 +97,8 @@ public class Player : MonoBehaviour
 
     }
 
+    private Tweener tweener = null;
+
     private void HandleJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -104,6 +107,10 @@ public class Player : MonoBehaviour
            myRigidBody.transform.localScale = Vector2.one;
 
             DOTween.Kill(myRigidBody.transform);
+            if (tweener != null)
+            {
+                tweener.Kill();
+            }
 
            HandleScaleJump();
         }
@@ -112,7 +119,23 @@ public class Player : MonoBehaviour
     private void HandleScaleJump()
     {
         myRigidBody.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
-        myRigidBody.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        //myRigidBody.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+
+        tweener = DOTween.To(ScaleXGetter, ScaleXSetter, jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+
+
+        float ScaleXGetter()
+        {
+            return myRigidBody.transform.localScale.x;
+        }
+
+        void ScaleXSetter(float value)
+        {
+            var localScale = myRigidBody.transform.localScale;
+            localScale.x = value * _playerDirection;
+            myRigidBody.transform.localScale = localScale;
+        }
+
     }
 
 
