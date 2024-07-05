@@ -624,7 +624,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &388892838
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   speedRun: 20
   forceJump: 20
   jumpScaleY: 1
-  jumpScaleX: 0.7
+  jumpScaleX: 1
   animationDuration: 0.1
   ease: 27
   boolRun: Run
