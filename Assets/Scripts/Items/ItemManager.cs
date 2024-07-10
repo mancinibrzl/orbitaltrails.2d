@@ -15,7 +15,11 @@ public class ItemManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
           else
-                Destroy(gameObject);
+            Destroy(gameObject);
+    }
+
+    private void Start()
+    {
         Reset();
     }
 
