@@ -7,6 +7,7 @@ using System;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
+    public HealthBase healthBase;
 
 
     [Header("Speed Setup")]
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
 
     [Header("Animation Player")]
     public string boolRun = "Run";
+    public string triggerDeath = "Death";
     public Animator animator;
     public float playerSwipeDuration = .1f;
 
@@ -32,8 +34,23 @@ public class Player : MonoBehaviour
     private float _currentSpeed;
 
     private int _playerDirection = 1;
-    
-    
+
+
+    private void Awake()
+    {
+        if (healthBase != null)
+        {
+            healthBase.OnKill += OnPlayerKill;
+        }
+    }
+
+    private void OnPlayerKill()
+    {
+        healthBase.OnKill -= OnPlayerKill;
+        animator.SetTrigger(triggerDeath);
+    }
+
+
     private void Update()
     {
         HandleJump();
@@ -138,7 +155,10 @@ public class Player : MonoBehaviour
 
     }
 
-
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
 
 
 
