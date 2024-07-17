@@ -837,7 +837,9 @@ MonoBehaviour:
   damage: 100
   animator: {fileID: 0}
   triggerAttack: Attack
+  triggerKill: Kill
   healthBase: {fileID: 0}
+  timeToDestroy: 1
 --- !u!50 &273369742
 Rigidbody2D:
   serializedVersion: 4
@@ -3564,6 +3566,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8835229685202505509, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1290910034}
+    - targetCorrespondingSourceObject: {fileID: 8835229685202505509, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1290910038}
   m_SourcePrefab: {fileID: 100100000, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
 --- !u!4 &1290910011 stripped
 Transform:
@@ -3726,6 +3731,19 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 25
   m_SortAtRoot: 0
+--- !u!114 &1290910038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290910032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7463d96acb1b208469cd481bc1e3e14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1337130981}
 --- !u!212 &1326320276 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3294411287784764205, guid: 3de838754c767a446a5473969062a84e, type: 3}
@@ -3843,7 +3861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  destroyOnKill: 1
+  destroyOnKill: 0
   delayToKill: 1
   _flashColor: {fileID: 1290910034}
 --- !u!114 &1337130981
@@ -3859,8 +3877,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 1337130982}
+  healthBase: {fileID: 1337130980}
   friction: {x: -0.3, y: 0}
-  speed: 25
+  speed: 20
   speedRun: 30
   forceJump: 30
   jumpScaleY: 1
@@ -3868,6 +3887,7 @@ MonoBehaviour:
   animationDuration: 0.1
   ease: 27
   boolRun: Run
+  triggerDeath: Death
   animator: {fileID: 1290910033}
   playerSwipeDuration: 0.3
 --- !u!50 &1337130982
@@ -5317,8 +5337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3fd7554cd282d449db67311483ef08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLife: 10
-  destroyOnKill: 1
+  startLife: 5
+  destroyOnKill: 0
   delayToKill: 0
   _flashColor: {fileID: 1869040049}
 --- !u!114 &1869040051
@@ -5336,7 +5356,9 @@ MonoBehaviour:
   damage: 10
   animator: {fileID: 1884110762}
   triggerAttack: Attack
+  triggerKill: Death
   healthBase: {fileID: 1869040050}
+  timeToDestroy: 2
 --- !u!4 &1869040052
 Transform:
   m_ObjectHideFlags: 0
@@ -5346,7 +5368,7 @@ Transform:
   m_GameObject: {fileID: 1869040046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.84, y: -13.88, z: 0}
+  m_LocalPosition: {x: 20.84, y: -12.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
