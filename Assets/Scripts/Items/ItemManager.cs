@@ -7,7 +7,7 @@ using TMPro;
 public class ItemManager : Singleton<ItemManager>
 {
     public int coins;
-    [SerializeField] private TMP_Text _coinsText;
+    public TextMeshProUGUI uiCoinsText;
 
     private void Start()
     {
@@ -28,6 +28,6 @@ public class ItemManager : Singleton<ItemManager>
 
     private void UpdateCoinsText()
     {
-        _coinsText.text = "x " + coins.ToString();
+        uiCoinsText.text = coins.ToString();
     }
 }
