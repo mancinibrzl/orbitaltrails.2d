@@ -20,6 +20,12 @@ public class Player : MonoBehaviour
 
     private Animator _currentPlayer;
 
+    [Header("Jump Colission Check")]
+
+    public Collider2D collider2D;
+    public float disToGround;
+    public float spaceToGround = .1f;
+
 
     private void Awake()
     {
@@ -33,6 +39,17 @@ public class Player : MonoBehaviour
         destroyHelper.player = this;
         var gunBase = _currentPlayer.GetComponentInChildren<GunBase>();
         gunBase.playerSideReference = transform;
+
+        if (collider2D != null)
+        {
+            disToGround = collider2D.bounds.extents.y;
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, disToGround + spaceToGround);
+        return Physics2D.Raycast(transform.position, -Vector2.up, disToGround + spaceToGround);
     }
 
     private void OnPlayerKill()
@@ -44,6 +61,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        IsGrounded();
         HandleJump();
         HandleMoviment();
     }
@@ -109,7 +127,7 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
            myRigidBody.velocity = Vector2.up * soPlayerSetup.forceJump;
            myRigidBody.transform.localScale = Vector2.one;
