@@ -29,6 +29,10 @@ public class Player : MonoBehaviour
         }
 
         _currentPlayer = Instantiate(soPlayerSetup.playerAnimation, transform);
+        var destroyHelper = _currentPlayer.GetComponentInChildren<PlayerDestroyHelper>();
+        destroyHelper.player = this;
+        var gunBase = _currentPlayer.GetComponentInChildren<GunBase>();
+        gunBase.playerSideReference = transform;
     }
 
     private void OnPlayerKill()
