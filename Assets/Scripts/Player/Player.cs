@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         }
 
         _currentPlayer = Instantiate(soPlayerSetup.playerAnimation, transform);
+        _currentPlayer.transform.localPosition = Vector3.zero;
         var destroyHelper = _currentPlayer.GetComponentInChildren<PlayerDestroyHelper>();
         destroyHelper.player = this;
         var gunBase = _currentPlayer.GetComponentInChildren<GunBase>();
