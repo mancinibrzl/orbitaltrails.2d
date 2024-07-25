@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public Collider2D collider2D;
     public float disToGround;
     public float spaceToGround = .1f;
+    public ParticleSystem jumpVFX;
 
 
     private void Awake()
@@ -50,7 +51,8 @@ public class Player : MonoBehaviour
     private bool IsGrounded()
     {
         Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, disToGround + spaceToGround);
-        return Physics2D.Raycast(transform.position, -Vector2.up, disToGround + spaceToGround);
+        var hit2D = Physics2D.Raycast(transform.position, -Vector2.up, disToGround + spaceToGround);
+        return hit2D;
     }
 
     private void OnPlayerKill()
@@ -140,7 +142,14 @@ public class Player : MonoBehaviour
             }
 
            HandleScaleJump();
+           PlayJumpVFX();
         }
+    }
+
+    private void PlayJumpVFX()
+    {
+        //VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position);
+        if(jumpVFX != null) jumpVFX.Play();
     }
 
     private void HandleScaleJump()
