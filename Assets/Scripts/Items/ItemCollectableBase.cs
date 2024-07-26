@@ -8,11 +8,13 @@ public class ItemCollectableBase : MonoBehaviour
     public ParticleSystem particleSystem;
     public float timeToHide = 3;
     public GameObject graphicItem;
+    public Collider2D[] colliders;
 
 
     private void Awake()
     {
         //if (particleSystem != null) particleSystem.transform.SetParent(null);
+        colliders = GetComponentsInChildren<Collider2D>();
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,8 +27,19 @@ public class ItemCollectableBase : MonoBehaviour
     protected virtual void Collect() 
     {
         if(graphicItem != null) graphicItem.SetActive(false);
+        if(colliders != null) 
+        {
+             foreach(var collider in colliders) 
+            
+           {
+                collider.enabled = false;
+           }
         Invoke("HideObject", timeToHide);
         OnCollect();
+
+
+    }
+
     }
 
     private void HideObject()
