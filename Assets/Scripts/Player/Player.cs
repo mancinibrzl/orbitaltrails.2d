@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     //public Animator animator;
 
+    public AudioSource somDoPulo;
 
     private float _currentSpeed;
     private int _playerDirection = 1;
@@ -134,6 +135,7 @@ public class Player : MonoBehaviour
         {
            myRigidBody.velocity = Vector2.up * soPlayerSetup.forceJump;
            myRigidBody.transform.localScale = Vector2.one;
+            somDoPulo.Play();
 
             DOTween.Kill(myRigidBody.transform);
             if (tweener != null)

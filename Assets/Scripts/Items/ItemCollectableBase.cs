@@ -10,6 +10,10 @@ public class ItemCollectableBase : MonoBehaviour
     public GameObject graphicItem;
     public Collider2D[] colliders;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+
+
 
     private void Awake()
     {
@@ -51,6 +55,7 @@ public class ItemCollectableBase : MonoBehaviour
     protected virtual void OnCollect() 
     {
         if (particleSystem != null) particleSystem.Play();
+        if (audioSource != null) audioSource.Play();
     }
 
 
