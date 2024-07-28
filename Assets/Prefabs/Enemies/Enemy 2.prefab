@@ -69,7 +69,7 @@ MonoBehaviour:
   animator: {fileID: 5437320355469781720}
   triggerAttack: Attack
   triggerKill: Kill
-  healthBase: {fileID: 8064394097715120979}
+  healthBase: {fileID: 0}
   timeToDestroy: 1
 --- !u!61 &640109502390266351
 BoxCollider2D:
@@ -128,10 +128,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -152,7 +152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3524359751616297359}
-  - component: {fileID: 8918089404781240497}
+  - component: {fileID: 1023278492798173987}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -176,18 +176,22 @@ Transform:
   - {fileID: 1288163052218724568}
   m_Father: {fileID: 1045823289925897875}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!210 &8918089404781240497
-SortingGroup:
+--- !u!114 &1023278492798173987
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6807575024724138715}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 30
-  m_SortAtRoot: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1184cdb578f9048a21eb55d9576492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pontosDoCaminho:
+  - {fileID: 4337194959446449219}
+  - {fileID: 586907737808376249}
+  velocidadeDeMovimento: 2
 --- !u!1 &8605827196449408675
 GameObject:
   m_ObjectHideFlags: 0
