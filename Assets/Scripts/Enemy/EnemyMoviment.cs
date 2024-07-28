@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class EnemyMoviment : MonoBehaviour
 {
+    [Header("Caminho do Inimigo")]
     [SerializeField] private Transform[] pontosDoCaminho;
-
     private int pontoAtual;
-    [SerializeField] private float velocidadeDeMovimento;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Movimento do Inimigo")]
+    [SerializeField] private float velocidadeDeMovimento;
+    private float ultimaPosicaoX;
+
+    private void Start()
     {
-        
+        pontoAtual = 0;
+        transform.position = pontosDoCaminho[pontoAtual].position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        MovimentarInimigo();
+        EspelharNaHorizontal();
     }
 
     private void MovimentarInimigo()
@@ -30,6 +33,8 @@ public class EnemyMoviment : MonoBehaviour
         {
             pontoAtual += 1;
 
+            ultimaPosicaoX = transform.localPosition.x;
+
             if (pontoAtual >= pontosDoCaminho.Length)
             {
                 pontoAtual = 0;
@@ -38,6 +43,17 @@ public class EnemyMoviment : MonoBehaviour
         
     }
 
+    private void EspelharNaHorizontal()
+    {
+        if (transform.localPosition.x < ultimaPosicaoX)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (transform.localPosition.x > ultimaPosicaoX)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+    }
 
 
 
